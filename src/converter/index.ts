@@ -5,8 +5,15 @@ const convert = (object: Records | null) => {
 
     let res = "";
 
-    res += "public class " + object.name + "{\n" + "}\n";
+    res += "public class " + object.name + "{\n";
 
+    for (const field of object.fields) {
+        if (typeof(field.type) === 'string') {
+            res += "    " + "private" + " " + field.type + " " + field.name + ";\n";
+        }
+    }
+
+    res += "}\n";
     return res;
 }
 

@@ -1,10 +1,18 @@
 import convert from "./index";
 
-const r: Records = {
+const r1: Records = {
     name: "Person",
     type: "record",
     fields: [
-        {name: "Person", type: {name: "age", type: "int" }}
+    ]
+}
+
+const r2: Records = {
+    name: "Person",
+    type: "record",
+    fields: [
+        // {name: "Person", type: {name: "age", type: "int" }}
+        {name: "age", type: "int"}
     ]
 }
 
@@ -14,6 +22,14 @@ describe("Convert functin test", () => {
     })
 
     test("The class name is properly set", () => {
-        expect(convert(r)).toBe("public class Person{\n}\n");
+        expect(convert(r1)).toBe("public class Person{\n}\n");
+    })
+
+    test("The class contains a field of name age and type int", () => {
+        const res = 'public class Person{\n'
+                    + '    private int age;\n'
+                    + '}\n';
+
+        expect(convert(r2)).toBe(res);
     })
 })

@@ -49,7 +49,7 @@ interface Fixed extends Schema<FixedType> {
 
 interface Field {
     name: string
-    type: Fixed | Maps | Arrays | Records | Enums | Primitive
+    type: Fixed | Maps | Arrays | Records | Enums | Primitive | Complexes | Primitives | string
 }
 
 type AvroObject = Fixed | Maps | Arrays | Records | Enums | Primitive
