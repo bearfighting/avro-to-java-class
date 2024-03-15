@@ -51,3 +51,5 @@ interface Field {
     name: string
     type: Fixed | Maps | Arrays | Records | Enums | Primitive
 }
+
+type AvroObject = Fixed | Maps | Arrays | Records | Enums | Primitive
