@@ -18,7 +18,7 @@ const r2: Records = {
 
 describe("Convert functin test", () => {
     test("The input value is null", () => {
-        expect(convert(null)).toBe("");
+        expect(convert()).toBe("");
     })
 
     test("The class name is properly set", () => {
