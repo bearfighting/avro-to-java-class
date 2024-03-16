@@ -1,4 +1,7 @@
-const convert = (object: Records | null) => {
+import addTabSpaces from "../utils/add-tab-spaces";
+import addFields from "./add-fields/add-fields";
+
+const convert = (object?: Records, hasGetter: boolean = true, hasSetter: boolean = false) => {
     if (!object) {
         return "";
     }
@@ -7,10 +10,30 @@ const convert = (object: Records | null) => {
 
     res += "public class " + object.name + "{\n";
 
-    for (const field of object.fields) {
-        if (typeof(field.type) === 'string') {
-            res += "    " + "private" + " " + field.type + " " + field.name + ";\n";
+    res += addFields(object.fields);
+
+    if (hasGetter) {
+        for (const field of object.fields) {
+            if (typeof (field.type === 'string')) {
+                res += addTabSpaces()
+                    + "public" + " "
+                    + field.type
+                    + " "
+                    + field.name
+                    + "()"
+                    + "{\n"
+                    + addTabSpaces(2)
+                    + "return "
+                    + "this."
+                    + field.name
+                    + ";\n"
+                    + "}\n";
+            }
         }
+    }
+
+    if (hasSetter) {
+
     }
 
     res += "}\n";

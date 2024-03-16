@@ -6,7 +6,8 @@ type MapType = "map"
 type FixedType = "fixed"
 type Complexes = RecordType | EnumType | ArrayType | MapType | FixedType
 type Derived = string
-
+type ClassType = 'class' | 'record'
+type Visibility = "private" | "public"
 interface Schema<T = string> {
     type: T
     name: string
@@ -23,6 +24,9 @@ interface Enums extends Schema<EnumType>{
 
 interface Records extends Schema<RecordType>{
     namespace?: "string"
+    classType?: ClassType
+    methods?: Array<string>  
+    visibility?: Visibility
     doc?: "string"
     order?: "descending" | "ascending" | "ignore"
     aliases?: Array<string>
@@ -35,8 +39,9 @@ interface Arrays<T = Primitives | Complexes> extends Schema<ArrayType> {
 }
 
 interface Maps extends Schema<MapType> {
-    values: string
-    default: {}
+    key: string
+    value: string
+    default?: Record<string, string>
 }
 
 type Unions<T = Primitives | Complexes> = Array<T>
@@ -53,3 +58,4 @@ interface Field {
 }
 
 type AvroObject = Fixed | Maps | Arrays | Records | Enums | Primitive
+
